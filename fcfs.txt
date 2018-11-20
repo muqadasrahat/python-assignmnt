@@ -1,0 +1,36 @@
+	
+busttime = []
+
+print("Enter the number of process: ")
+number = int(input())
+
+print("Enter the burst time of the processes: \n")
+busttime = list(map(int, raw_input().split()))
+
+waittime = []
+avgwt = 0
+turnaroundtime = []
+avgtat = 0
+
+waittime.insert(0,0)
+turnaroundtime.insert(0,busttime[0])
+
+for index in range(1,len(busttime)):
+ waittime.insert (index, waittime[ index-1 ] + busttime[ index-1 ] )
+ turnaroundtime.insert (index, waittime[ index ] + busttime[ index ] )
+ avgwt += waittime[index]
+ avgtat += turnaroundtime[index]
+
+
+avgwt = float(avgwt) / number
+avgtat = float(avgtat) / number
+print("\n")
+
+print("Process\t  Burst Time\t  Waiting Time\t  Turn Around Time")
+
+for index in range(0,number):
+ print( str(index) + "\t\t" + str(busttime[index]) + "\t\t" + str(waittime[index]) + "\t\t" + str(turnaroundtime[index]))
+ print("\n")
+
+print("Average Waiting time is: "+str(avgwt))
+print("Average Turn Arount Time is: "+str(avgtat))
